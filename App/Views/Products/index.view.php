@@ -4,6 +4,10 @@
 use App\Models\Product;
 ?>
 
+<div class=" container pt-3 pb-5">
+    <a href="?c=products&a=create"
+       type="button" class="button btn btn-success">Pridaj bicykel</a>
+</div>
 
 <?php
 foreach ($data as $product){
