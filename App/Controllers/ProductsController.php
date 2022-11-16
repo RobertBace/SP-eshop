@@ -39,7 +39,7 @@ class ProductsController extends AControllerBase
 
         $id = $this->request()->getValue('id');
 
-        $product = (new Product());
+        $product = ($id ? Product::getOne($id) : new Product());
 
         $product->setTitle($this->request()->getValue('title'));
         $product->setSubclass($this->request()->getValue('subclass'));
@@ -60,5 +60,11 @@ class ProductsController extends AControllerBase
 
         $product->save();
         return $this->redirect("?c=products");
+    }
+
+    public function edit(){
+        $id = $this->request()->getValue('id');
+        $editProduct = Product::getOne($id);
+        return $this->html($editProduct,viewName: 'create');
     }
 }

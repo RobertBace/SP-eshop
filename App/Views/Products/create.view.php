@@ -2,7 +2,7 @@
     <?php
     /** @var \App\Models\Product $data */
     if ($data->getId()) { ?>
-       <input type="hidden" name="id" value="<?php echo $data->getId()?>">
+        <input type="hidden" name="id" value="<?php echo $data->getId()?>">
     <?php } ?>
     <div class="container">
         <div class="mb-3">
@@ -20,21 +20,21 @@
 
         <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">Type</label>
-        <select class="form-select" name="type"  >
-            <option ><?php echo $data->getType()?></option>
+            <select class="form-select" name="type"  >
+                <option ><?php echo $data->getType()?></option>
 
-            <?php if ($data->getType() != "cestny"){ ?>
-                <option >cestny</option>
-            <?php } ?>
+                <?php if ($data->getType() != "cestny"){ ?>
+                    <option >cestny</option>
+                <?php } ?>
 
-            <?php if ($data->getType() != "horsky"){ ?>
-                <option >horsky</option>
-            <?php } ?>
+                <?php if ($data->getType() != "horsky"){ ?>
+                    <option >horsky</option>
+                <?php } ?>
 
-            <?php if ($data->getType() != "ebike"){ ?>
-                <option >ebike</option>
-            <?php } ?>
-        </select>
+                <?php if ($data->getType() != "ebike"){ ?>
+                    <option >ebike</option>
+                <?php } ?>
+            </select>
         </div>
 
         <div class="mb-3">
