@@ -29,6 +29,17 @@ foreach ($data as $product){
     <div class="row align mb-4 ">
         <p> <?php echo $product->getDescription() ?> </p>
     </div>
+    <div class="row container riadokMargin">
+        <div class="col">
+            <a type="button" class="button btn btn-warning">Uprav</a>
+        </div>
+        <div class="col">
+            <a href="?c=products&a=delete&id=<?php echo $product->getId() ?>"
+               type="button" class="button btn btn-danger">Vymaz</a>
+        </div>
+
+
+    </div>
 
 
 </div>

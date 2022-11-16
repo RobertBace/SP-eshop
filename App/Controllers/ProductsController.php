@@ -15,5 +15,19 @@ class ProductsController extends AControllerBase
         return $this->html($products);
     }
 
+    public function delete(){
+        $id = $this->request()->getValue('id');
+        $deleteProduct = Product::getOne($id);
 
+        $rem = Product::getOne($id);
+        if($rem->getPath()){
+            unlink($rem->getPath());
+        }
+
+        if($deleteProduct){
+            $deleteProduct->delete();
+            return $this->redirect("?c=products");
+        }
+        return NULL;
+    }
 }
