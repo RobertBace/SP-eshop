@@ -15,56 +15,73 @@ class ProductsController extends AControllerBase
         return $this->html($products);
     }
 
-    public function delete(){
+    public function delete()
+    {
         $id = $this->request()->getValue('id');
         $deleteProduct = Product::getOne($id);
 
         $rem = Product::getOne($id);
-        if($rem->getPath()){
+        if ($rem->getPath()) {
             unlink($rem->getPath());
         }
 
-        if($deleteProduct){
+        if ($deleteProduct) {
             $deleteProduct->delete();
             return $this->redirect("?c=products");
         }
         return NULL;
     }
 
-    public function create(){
-        return $this->html(new Product(),viewName: 'create');
+    public function create()
+    {
+        return $this->html(new Product(), viewName: 'create');
     }
 
-    public function store(){
-
+    public function store()
+    {
         $id = $this->request()->getValue('id');
 
         $product = ($id ? Product::getOne($id) : new Product());
 
-        $product->setTitle($this->request()->getValue('title'));
-        $product->setSubclass($this->request()->getValue('subclass'));
-        $product->setPrice($this->request()->getValue('price'));
-        $product->setType($this->request()->getValue('type'));
-        $product->setDescription($this->request()->getValue('description'));
+        $title = $this->request()->getValue('title');
+        $subclass =  $this->request()->getValue('subclass');
+        $price = $this->request()->getValue('price');
+        $type = $this->request()->getValue('type');
+        $description = $this->request()->getValue('description');
 
-        $image = $this->request()->getFiles()['img'];
-        if (!is_null($image) && $image['error'] == UPLOAD_ERR_OK) {
-            $newname = "public" . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR . time() . "_" . $image['name'];
-            if (move_uploaded_file($image["tmp_name"], $newname)) {
-                if($product->getPath() != $newname && ($product->getPath())){
-                    unlink($product->getPath());
+        if (!is_null($price) && !is_null($type) &&
+            ($type == "cestny" || $type == "horsky" || $type == "ebike") &&
+            is_float(is_numeric($price) ? (float)$price : $price) && $price > 0 &&
+            is_string($title) && strlen($title) <= 15 &&
+            is_string($subclass) && strlen($subclass) <= 40 &&
+            is_string($description)
+        ) {
+            $product->setTitle($title);
+            $product->setSubclass($subclass);
+            $product->setPrice($price);
+            $product->setType($type);
+            $product->setDescription($description);
+
+            $image = $this->request()->getFiles()['img'];
+            if (!is_null($image) && $image['error'] == UPLOAD_ERR_OK) {
+                $newname = "public" . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR . time() . "_" . $image['name'];
+                if (move_uploaded_file($image["tmp_name"], $newname)) {
+                    if ($product->getPath() != $newname && ($product->getPath())) {
+                        unlink($product->getPath());
+                    }
+                    $product->setPath($newname);
                 }
-                $product->setPath($newname);
             }
+            $product->save();
         }
 
-        $product->save();
         return $this->redirect("?c=products");
     }
 
-    public function edit(){
+    public function edit()
+    {
         $id = $this->request()->getValue('id');
         $editProduct = Product::getOne($id);
-        return $this->html($editProduct,viewName: 'create');
+        return $this->html($editProduct, viewName: 'create');
     }
 }

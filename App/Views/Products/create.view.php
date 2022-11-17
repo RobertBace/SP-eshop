@@ -6,21 +6,21 @@
     <?php } ?>
     <div class="container">
         <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label">Title</label>
-            <input type="varchar(25)" class="form-control" name="title" value="<?php echo $data->getTitle()?>">
+            <label for="formGroupExampleInput" class="form-label">Title: *</label>
+            <input required="text"  maxlength="15" class="form-control" name="title" value="<?php echo $data->getTitle()?>">
         </div>
         <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">Subclass</label>
-            <input type="text" class="form-control" name="subclass" value="<?php echo $data->getSubclass()?>">
+            <input type="text"  maxlength="40" class="form-control" name="subclass" value="<?php echo $data->getSubclass()?>">
         </div>
         <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label">Price</label>
-            <input type="float" class="form-control" name="price" value="<?php echo $data->getPrice()?>">
+            <label for="formGroupExampleInput" class="form-label">Price: *</label>
+            <input type="number" step="0.01" min="0" class="form-control" name="price" value="<?php echo $data->getPrice()?>">
         </div>
 
         <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">Type</label>
-            <select class="form-select" name="type"  >
+            <select class="form-select" name="type"  required="text">
                 <option ><?php echo $data->getType()?></option>
 
                 <?php if ($data->getType() != "cestny"){ ?>

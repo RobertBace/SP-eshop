@@ -32,4 +32,6 @@ window.onload = function () {
         document.getElementById("cartIndicator").style.visibility = "hidden";
         document.getElementById("cartIndicatorNum").style.visibility = "hidden";
     }
+
+
 }
