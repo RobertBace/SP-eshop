@@ -26,7 +26,7 @@
             <img src="public/images/obrazok1.jpg" class="produkt pb-5" alt="horsky bicykel">
             <h2 class="fw-normal">Horské bicykle</h2>
             <p>pevné a hardtail, celoodpružené</p>
-            <p><a class="btn btn-secondary" href="horske.php">Viac »</a>
+            <p><a class="btn btn-secondary" href="#">Viac »</a>
             </p>
         </div>
 

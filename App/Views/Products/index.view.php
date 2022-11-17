@@ -2,6 +2,7 @@
 /** @var Product[] $data */
 
 use App\Models\Product;
+
 ?>
 
     <div class=" container pt-3 pb-5">
@@ -10,9 +11,10 @@ use App\Models\Product;
     </div>
 
 <?php
-foreach ($data as $product){
+$poc =0;
+foreach ($data as $product) {
+    $poc ++;
     ?>
-
 
 
     <div class="container align-items-center kartaActive mb-5 mt-5">
@@ -26,7 +28,7 @@ foreach ($data as $product){
                 <h1 class="fw-normal"><?php echo $product->getTitle() ?></h1>
                 <p><?php echo $product->getSubclass() ?></p>
                 <span class="cena p-2"><?php echo $product->getPrice() ?> € </span>
-                <span><a class="btn btn-secondary tlacitko" href="#">Pridať do košíka</a></span>
+                <span><a class="btn btn-secondary tlacitko" href="#" id="kosButton<?php echo $poc ?>">Pridať do košíka</a></span>
             </div>
 
         </div>
@@ -36,7 +38,7 @@ foreach ($data as $product){
         <div class="row container riadokMargin">
             <div class="col">
                 <a href="?c=products&a=edit&id=<?php echo $product->getId() ?>
-                    type="button" class="button btn btn-warning">Uprav</a>
+                    type=" button" class="button btn btn-warning">Uprav</a>
             </div>
             <div class="col">
                 <a href="?c=products&a=delete&id=<?php echo $product->getId() ?>"
