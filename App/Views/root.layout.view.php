@@ -43,8 +43,8 @@
                         Bicykle
                     </a>
                     <ul class="dropdown-menu z-Home">
-                        <li><a class="dropdown-item" href="horske.php">Horské bicykle</a></li>
-                        <li><a class="dropdown-item" href="cestne.php">Cestné bicykle</a></li>
+                        <li><a class="dropdown-item" href="?c=products">Cestné bicykle</a></li>
+                        <li><a class="dropdown-item" href="#">Horské bicykle</a></li>
                         <li><a class="dropdown-item" href="#">E-bicykle</a></li>
                     </ul>
                 </li>
