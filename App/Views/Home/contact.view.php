@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <link href="style.css" rel="stylesheet">
+    <link href="../../CSS/style.css" rel="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
@@ -11,39 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg menu ">
-    <div class="container-fluid">
-        <a href="index.html" class="navbar-brand mb-0 h1">
-            <img src="obrazky/logo.webp" class="logo"
-                 alt="logo firmy">
-        </a>
-        <a class="brand" href="index.html">All4Cycling</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse ms-3" id="navbarScroll">
-            <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll " style="--bs-scroll-height: 400px;">
-                <li class=" dropdown menuText ">
-                    <a class=" dropdown-toggle menuText" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Bicykle
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="horske.html">Horské bicykle</a></li>
-                        <li><a class="dropdown-item" href="cestne.html">Cestné bicykle</a></li>
-                        <li><a class="dropdown-item" href="#">E-bicykle</a></li>
-                    </ul>
-                </li>
-
-                <li class="menuText">
-                    <a class="menuText" aria-current="page" href="kontakt.html">Kontakt</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 <div class="container d-flex align-center gap ">
     <div class="row">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2611.5667179542693!2d19.038051515860186!3d49.113871190637454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47145537a4b085db%3A0x86fda60acef4d2b8!2sMohylka%2011%2C%20038%2053%20Turany!5e0!3m2!1ssk!2ssk!4v1665816095836!5m2!1ssk!2ssk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -72,13 +40,13 @@
     <div class="container text-center">
         <div class="row">
             <div class="col">
-                <img src="obrazky/telephone-fill.svg" class="icons" alt="symbol tel">
+                <img src="public/images/telephone-fill.svg" class="icons" alt="symbol tel">
             </div>
             <div class="col">
-                <img src="obrazky/envelope-fill.svg" class="icons" alt="symbol mail">
+                <img src="public/images/envelope-fill.svg" class="icons" alt="symbol mail">
             </div>
             <div class="col">
-                <img src="obrazky/geo-alt-fill.svg" class="icons" alt="symbol gps">
+                <img src="public/images/geo-alt-fill.svg" class="icons" alt="symbol gps">
             </div>
         </div>
         <div class="row">
