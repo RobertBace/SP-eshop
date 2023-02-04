@@ -12,10 +12,13 @@ window.onload = function () {
                 vKosi ++;
                 if(vKosi > 9){
                     num.style.fontSize = 11+"px";
-                    num.style.left = -37+"px";
-                    num.style.top = 2+"px";
+                    num.style.left = -21+"px";
+                    num.style.top = -3+"px";
                     num.innerText = vKosi;
                 } else {
+                    num.style.fontSize = 16+"px";
+                    num.style.left = -19+"px";
+                    num.style.top = -7+"px";
                     num.innerText = vKosi;
                 }
                 let ind = document.getElementById("cartIndicator");

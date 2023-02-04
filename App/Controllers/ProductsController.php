@@ -75,7 +75,7 @@ class ProductsController extends AControllerBase
 
             $image = $this->request()->getFiles()['img'];
             if (!is_null($image) && $image['error'] == UPLOAD_ERR_OK) {
-                $newname = "public" . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR . time() . "_" . $image['name'];
+                $newname = "public" . "/" . "images" . "/" . time() . "_" . $image['name'];
                 if (move_uploaded_file($image["tmp_name"], $newname)) {
                     if ($product->getPath() != $newname && ($product->getPath())) {
                         unlink($product->getPath());

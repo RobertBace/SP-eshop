@@ -4,22 +4,6 @@
 /** @var Array $data */
 
 ?>
-<!DOCTYPE html>
-<html lang="sk">
-<head>
-    <title><?= \App\Config\Configuration::APP_NAME ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-            crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="public/css/styl.css">
-    <script src="public/js/script.js"></script>
-</head>
-<body>
 
 <div class="container">
     <div class="row">
@@ -32,7 +16,7 @@
                     </div>
                     <form class="form-signin" method="post" action="?c=brands&a=store">
                         <div class="form-label-group mb-3">
-                            <input name="title" type="text" required class="form-control" required>
+                            <input name="title" type="text" required class="form-control">
                         </div>
                         <div class="text-center">
                             <button class="btn btn-primary" type="submit" name="submit">Pridaj
@@ -57,10 +41,14 @@
                     <div>
                         <ul class="list-group pt-5">
                         <?php foreach ($data['znacky'] as $current) { ?>
-                            <li class="list-group-item d-flex justify-content-between align-items-center brandFont">
+                            <li class="list-group-item d-flex justify-content-between align-items-center brandFont ">
                                 - <?php echo $current->getName() ?>
-                                <a href="?c=brands&a=delete&id=<?php echo $current->getId() ?>"
-                                   type="button" class="button btn btn-danger buttonCeenter brandButton mb-0">Vymaz</a>
+                                <div class="row">
+                                    <a href="?c=brands&a=update&id=<?php echo $current->getId() ?>"
+                                       class="button btn btn-warning buttonCeenter brandButton mb-0 mx-2">Uprav</a>
+                                    <a href="?c=brands&a=delete&id=<?php echo $current->getId() ?>"
+                                       class="button btn btn-danger buttonCeenter brandButton mb-0">Vymaz</a>
+                                </div>
                             </li>
                         <?php } ?>
                         </ul>
@@ -70,7 +58,3 @@
         </div>
     </div>
 </div>
-
-
-</body>
-</html>

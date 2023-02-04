@@ -3,21 +3,7 @@ $layout = 'auth';
 /** @var Array $data */
 /** @var \App\Core\IAuthenticator $auth */
 ?>
-<!DOCTYPE html>
-<html lang="sk">
-<head>
-    <title><?= \App\Config\Configuration::APP_NAME ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-            crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="public/css/styl.css">
-    <script src="public/js/script.js"></script>
-</head>
+
 <?php $user = \App\Models\User::getOne($auth->getLoggedUserId()) ?>
 <div class="container">
     <div class="row">
@@ -28,7 +14,7 @@ $layout = 'auth';
                     <div class="text-center text-danger mb-3">
                         <?= @$data['message'] ?>
                     </div>
-                    <label for="formGroupExampleInput2" class="form-label">Username:</label>
+                    <label class="form-label">Username:</label>
                     <form class="form-signin" method="post" action="?c=auth&a=storeEdit">
                         <div class="form-label-group mb-3">
                             <input name="username" type="text" class="form-control" placeholder="Username"
@@ -43,7 +29,7 @@ $layout = 'auth';
                         <!--                        (?=\S*[A-Z]): and at least one uppercase letter-->
                         <!--                        (?=\S*[\d]): and at least one number-->
                         <!--                        $: anchored to the end of the string-->
-                        <label for="formGroupExampleInput2" class="form-label">New password (optional):</label>
+                        <label class="form-label">New password (optional):</label>
                         <div class="form-label-group mb-3">
                             <input name="password" type="password" class="form-control"
                                    placeholder=" New Password"
@@ -55,7 +41,7 @@ $layout = 'auth';
                                    placeholder="Reenter New Password"
                                    pattern="^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[\d])\S*$">
                         </div>
-                        <label for="formGroupExampleInput2" class="form-label text-danger">Old password* :</label>
+                        <label class="form-label text-danger">Old password* :</label>
                         <div class="form-label-group mb-3">
                             <input name="oldPassword" type="password" class="form-control"
                                    placeholder="Enter Old Password" required

@@ -18,7 +18,8 @@ class BrandsController extends AControllerBase
 
     public function store()
     {
-        $brand = new Brand();
+        $id = $this->request()->getValue('id');
+        $brand = ($id ? Brand::getOne($id) : new Brand());
 
         $brandName = $this->request()->getValue('title');
 
@@ -55,5 +56,14 @@ class BrandsController extends AControllerBase
                 return $this->html($data, viewName: 'index');
             }
         }
+        $brands = Brand::getAll();
+        $data = ['znacky' => $brands, 'messageInfo' => ""];
+        return $this->html($data, viewName: 'index');
+    }
+
+    public function update(){
+        $id = $this->request()->getValue('id');
+        $data = ['brand' => Brand::getOne($id)];
+        return $this->html($data, viewName: 'update');
     }
 }

@@ -128,7 +128,7 @@
     position: relative;
     height: 20px;
     width: 20px !important;
-    top: -15px;
+    top: -5px;
     left: -5px;
     visibility: hidden;
 }
@@ -136,8 +136,9 @@
 .indicatorNumber {
     color: white;
     position: relative;
-    top: -2px;
-    left: -35px;
+    font-size: 16px;
+    top: -7px;
+    left: -19px;
     text-decoration: none;
     visibility: hidden;
 }
@@ -158,10 +159,9 @@
 }
 
 .brandButton{
-    width: 120px;
-    height: 40px;
-    font-size: 20px;
-    align-items: center;
+    width: 80px;
+    height: 35px;
+    font-size: 18px;
 }
 
 .brandFont{
