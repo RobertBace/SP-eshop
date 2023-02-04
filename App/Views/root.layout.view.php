@@ -1,6 +1,7 @@
 <?php
 /** @var string $contentHTML */
 /** @var \App\Core\IAuthenticator $auth */
+
 ?>
 <!DOCTYPE html>
 <html lang="sk">
@@ -43,15 +44,32 @@
                         Bicykle
                     </a>
                     <ul class="dropdown-menu z-Home">
-                        <li><a class="dropdown-item" href="horske.php">Horské bicykle</a></li>
-                        <li><a class="dropdown-item" href="cestne.php">Cestné bicykle</a></li>
-                        <li><a class="dropdown-item" href="#">E-bicykle</a></li>
+                        <li><a class="dropdown-item" href="?c=products&a=cestne">Cestné bicykle</a></li>
+                        <li><a class="dropdown-item" href="?c=products&a=horske">Horské bicykle</a></li>
+                        <li><a class="dropdown-item" href="?c=products&a=ebike">E-bicykle</a></li>
                     </ul>
                 </li>
 
                 <li class="menuText">
                     <a class="menuText" aria-current="page" href="?c=home&a=contact">Kontakt</a>
                 </li>
+
+                <?php if(!$auth->isLogged()) {?>
+                    <li class="menuText">
+                        <a class="menuText" aria-current="page" href="?c=auth&a=login">Prihlasiť sa</a>
+                    </li>
+                <?php } else {?>
+                    <li class=" dropdown menuText ">
+                        <a class=" dropdown-toggle menuText" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <?=  \App\Models\User::getOne($auth->getLoggedUserId())->getUsername() ?>
+                        </a>
+                        <ul class="dropdown-menu z-Home dropdownM">
+                            <li><a class="dropdown-item " href="?c=auth&a=logout">Odhlasiť sa</a></li>
+                            <li><a class="dropdown-item " href="?c=auth&a=edit">Uprav profil</a></li>
+                        </ul>
+                    </li>
+                <?php }?>
             </ul>
         </div>
     </div>

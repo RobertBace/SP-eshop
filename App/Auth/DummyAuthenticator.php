@@ -2,6 +2,7 @@
 
 namespace App\Auth;
 
+use App\Core\DB\Connection;
 use App\Core\IAuthenticator;
 
 /**
@@ -25,15 +26,25 @@ class DummyAuthenticator implements IAuthenticator
 
     /**
      * Verify, if the user is in DB and has his password is correct
-     * @param $login
+     * @param $email
      * @param $password
      * @return bool
      * @throws \Exception
      */
-    function login($login, $password): bool
+    function login($email, $password): bool
     {
-        if ($login == self::LOGIN && password_verify($password, self::PASSWORD_HASH)) {
-            $_SESSION['user'] = self::USERNAME;
+        $sql = "SELECT email, password, username, id FROM users WHERE email = ?";
+        $query = Connection::connect()->prepare($sql);
+        $query->execute([$email]);
+
+        $fetchedData = $query->fetch();
+
+        if(!$fetchedData){
+            return false;
+        }
+
+        if ($email == $fetchedData['email'] && password_verify($password,$fetchedData['password'])) {
+            $_SESSION['user'] = $fetchedData['id'];
             return true;
         } else {
             return false;
@@ -43,7 +54,7 @@ class DummyAuthenticator implements IAuthenticator
     /**
      * Logout the user
      */
-    function logout() : void
+    function logout(): void
     {
         if (isset($_SESSION["user"])) {
             unset($_SESSION["user"]);
@@ -57,7 +68,6 @@ class DummyAuthenticator implements IAuthenticator
      */
     function getLoggedUserName(): string
     {
-
         return isset($_SESSION['user']) ? $_SESSION['user'] : throw new \Exception("User not logged in");
     }
 
@@ -85,6 +95,7 @@ class DummyAuthenticator implements IAuthenticator
      */
     function getLoggedUserId(): mixed
     {
-        return $_SESSION['user'];
+        //return $_SESSION['user'];
+        return isset($_SESSION['user']) ? $_SESSION['user'] : throw new \Exception("User not logged in");
     }
 }

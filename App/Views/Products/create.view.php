@@ -6,11 +6,20 @@
     <?php } ?>
     <div class="container">
         <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label">Title: *</label>
-            <input required="text"  maxlength="15" class="form-control" name="title" value="<?php echo $data->getTitle()?>">
+            <label for="formGroupExampleInput" class="form-label">Brand: *</label>
+            <select class="form-select" name="title"  required="text">
+
+                <option value="" selected disabled>Please select</option>
+
+                <?php
+                $brandsData = \App\Models\Brand::getAll();
+                foreach ($brandsData as $brand) { ?>
+                    <option ><?php echo $brand->getName() ?></option>
+                <?php } ?>
+            </select>
         </div>
         <div class="mb-3">
-            <label for="formGroupExampleInput2" class="form-label">Subclass</label>
+            <label for="formGroupExampleInput2" class="form-label">Class</label>
             <input type="text"  maxlength="40" class="form-control" name="subclass" value="<?php echo $data->getSubclass()?>">
         </div>
         <div class="mb-3">

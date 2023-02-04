@@ -7,7 +7,7 @@ use App\Core\Model;
 class Product extends Model
 {
     protected $id;
-    protected $title;
+    protected $brand;
     protected $subclass;
     protected $price;
     protected $description;
@@ -33,17 +33,17 @@ class Product extends Model
     /**
      * @return mixed
      */
-    public function getTitle()
+    public function getBrandID()
     {
-        return $this->title;
+        return $this->brand;
     }
 
     /**
-     * @param mixed $title
+     * @param mixed $brand
      */
-    public function setTitle($title): void
+    public function setBrandID($brand): void
     {
-        $this->title = $title;
+        $this->brand = $brand;
     }
 
     /**
@@ -126,5 +126,7 @@ class Product extends Model
         $this->type = $type;
     }
 
-
+    public function getBrand(){
+        return Brand::getOne($this->getBrandID())->getName();
+    }
 }

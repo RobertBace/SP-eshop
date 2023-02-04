@@ -4,7 +4,9 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\Brand;
 use App\Models\Product;
+
 
 class ProductsController extends AControllerBase
 {
@@ -12,24 +14,33 @@ class ProductsController extends AControllerBase
     public function index(): Response
     {
         $products = Product::getAll();
-        return $this->html($products);
+        return $this->html($products, viewName: 'index');
     }
 
-    public function delete()
+    public function delete() : Response
     {
         $id = $this->request()->getValue('id');
         $deleteProduct = Product::getOne($id);
 
         $rem = Product::getOne($id);
-        if ($rem->getPath()) {
-            unlink($rem->getPath());
+        if($rem != null){
+            if ($rem->getPath()) {
+                unlink($rem->getPath());
+            }
         }
+
 
         if ($deleteProduct) {
             $deleteProduct->delete();
-            return $this->redirect("?c=products");
+            if($deleteProduct->getType() == "cestny"){
+                return $this->cestne();
+            } else if($deleteProduct->getType() == "horsky"){
+                return $this->horske();
+            } else {
+                return $this->ebike();
+            }
         }
-        return NULL;
+       return $this->index();
     }
 
     public function create()
@@ -43,20 +54,20 @@ class ProductsController extends AControllerBase
 
         $product = ($id ? Product::getOne($id) : new Product());
 
-        $title = $this->request()->getValue('title');
+        $brandName = $this->request()->getValue('title');
         $subclass =  $this->request()->getValue('subclass');
         $price = $this->request()->getValue('price');
         $type = $this->request()->getValue('type');
         $description = $this->request()->getValue('description');
+        $brandID = Brand::getAll("name = ?", [@$brandName])[0]->getId();
 
         if (!is_null($price) && !is_null($type) &&
             ($type == "cestny" || $type == "horsky" || $type == "ebike") &&
             is_float(is_numeric($price) ? (float)$price : $price) && $price > 0 &&
-            is_string($title) && strlen($title) <= 15 &&
             is_string($subclass) && strlen($subclass) <= 40 &&
             is_string($description)
-        ) {
-            $product->setTitle($title);
+            ) {
+            $product->setBrandID($brandID);
             $product->setSubclass($subclass);
             $product->setPrice($price);
             $product->setType($type);
@@ -75,13 +86,36 @@ class ProductsController extends AControllerBase
             $product->save();
         }
 
-        return $this->redirect("?c=products");
+        if($type == "cestny"){
+            return $this->cestne();
+        } else if($type == "horsky"){
+            return $this->horske();
+        } else {
+            return $this->ebike();
+        }
     }
 
     public function edit()
     {
         $id = $this->request()->getValue('id');
         $editProduct = Product::getOne($id);
+
         return $this->html($editProduct, viewName: 'create');
+    }
+
+    public function cestne(): Response
+    {
+        $data = Product::getAll("type = ?", ['cestny']);
+        return $this->html($data, viewName: 'index');
+    }
+    public function horske(): Response
+    {
+        $data = Product::getAll("type = ?", ['horsky']);
+        return $this->html($data, viewName: 'index');
+    }
+    public function ebike(): Response
+    {
+        $data = Product::getAll("type = ?", ['ebike']);
+        return $this->html($data, viewName: 'index');
     }
 }

@@ -141,3 +141,29 @@
     text-decoration: none;
     visibility: hidden;
 }
+
+.maxSize {
+    width: 100%;
+}
+
+.dropdownM{
+    right: 0;
+    left: auto !important;
+}
+
+.buttonCeenter{
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.brandButton{
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
+    align-items: center;
+}
+
+.brandFont{
+    font-size: 20px;
+}
