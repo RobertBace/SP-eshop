@@ -51,7 +51,7 @@ abstract class Model implements \JsonSerializable
      */
     public static function getPkColumnName() : string
     {
-        return 'id';
+            return 'id';
     }
 
     /**

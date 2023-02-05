@@ -38,9 +38,11 @@
 
         <div class="collapse navbar-collapse ms-3" id="navbarScroll">
             <div class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll " style="--bs-scroll-height: 400px;">
-                <a href="#" class="navbar-brand mb-0 h1 "></a>
-                <img src="public/images/cart3.svg" class="logo" id="cart" alt="...">
+                <a href="?c=orders&a=index" >
+                    <img src="public/images/cart3.svg" class="logo" id="cart" alt="...">
+                </a>
                 <img src="public/images/red.png" class="logo indicator" id="cartIndicator" alt="...">
+
                 <a class="indicatorNumber" id="cartIndicatorNum">0</a>
                 <div class=" dropdown menuText ">
                     <a class=" dropdown-toggle menuText" href="#" role="button"
@@ -71,6 +73,7 @@
                         <ul class="dropdown-menu z-Home dropdownM">
                             <li><a class="dropdown-item " href="?c=auth&a=logout">Odhlasiť sa</a></li>
                             <li><a class="dropdown-item " href="?c=auth&a=edit">Uprav profil</a></li>
+                            <li><a class="dropdown-item " href="?c=orders&a=index">Moje objednovky</a></li>
                         </ul>
                     </div>
                 <?php } ?>

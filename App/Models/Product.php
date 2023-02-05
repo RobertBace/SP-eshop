@@ -129,4 +129,8 @@ class Product extends Model
     public function getBrand(){
         return Brand::getOne($this->getBrandID())->getName();
     }
+
+    public function getCountOfProduct($pid, $oid){
+        return OrdersProduct::getAll("productId = ? and orderId = ?", [$pid, $oid])[0]->getCount();
+    }
 }

@@ -167,3 +167,13 @@
 .brandFont{
     font-size: 20px;
 }
+
+.productDelete{
+    width: 50px;
+    text-align: center;
+}
+
+.productDeleteX{
+    color: red;
+    text-decoration: none;
+}

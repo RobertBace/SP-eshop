@@ -42,7 +42,7 @@ foreach ($data as $product) {
                 <h1 class="fw-normal"><?php echo $product->getBrand() ?></h1>
                 <p><?php echo $product->getSubclass() ?></p>
                 <span class="cena p-2"><?php echo $product->getPrice() ?> € </span>
-                <span><a class="btn btn-secondary tlacitko" href="#"
+                <span><a class="btn btn-secondary tlacitko" href="?c=orders&a=add&id=<?php echo $product->getId() ?>"
                          id="kosButton<?php echo $poc ?>">Pridať do košíka</a></span>
             </div>
 

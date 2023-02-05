@@ -1,14 +1,16 @@
-<?php
-/** @var \App\Models\Product $data */
-if ($data->getId()) { ?>
-    <input type="hidden" name="id" value="<?php echo $data->getId() ?>">
-<?php } ?>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-7 mx-auto">
-            <div class="card card-signin my-5">
-                <div class="card-body">
-                    <form method="post" action="?c=products&a=store" enctype="multipart/form-data">
+<form method="post" action="?c=products&a=store" enctype="multipart/form-data">
+    <?php
+    /** @var \App\Models\Product $data */
+    if ($data->getId()) { ?>
+        <input type="hidden" name="id" value="<?php echo $data->getId() ?>">
+    <?php } ?>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-7 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+
                         <div class="mb-3">
                             <label class="form-label">Brand: *</label>
                             <select class="form-select" name="title" required>
@@ -34,7 +36,7 @@ if ($data->getId()) { ?>
                         </div>
 
                         <div class="mb-3">
-                            <label  class="form-label">Type</label>
+                            <label class="form-label">Type</label>
                             <select class="form-select" name="type" required>
                                 <?php if ($data->getType() == null) { ?>
                                     <option value="" selected disabled>Please select</option>
@@ -61,15 +63,16 @@ if ($data->getId()) { ?>
                             <input type="text" class="form-control" name="description"
                                    value="<?php echo $data->getDescription() ?>">
                         </div>
-                    </form>
-                    <div>
-                        <form method="post">
-                            <input type="file" name="img">
-                        </form>
+
+                        <div>
+
+                                <input type="file" name="img">
+
+                        </div>
+                        <input type="submit" value="odoslať" class="mt-2">
                     </div>
-                    <input type="submit" value="odoslať" class="mt-2">
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>
