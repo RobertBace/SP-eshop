@@ -10,6 +10,7 @@ use App\Models\Brand;
 use App\Models\Product;
 use App\Models\User;
 use http\Message;
+
 $layout = 'auth';
 
 /**
@@ -123,7 +124,6 @@ class AuthController extends AControllerBase
     }
 
 
-
     public function storeEdit(): Response
     {
         $password = password_hash($this->request()->getValue('oldPassword'), PASSWORD_DEFAULT);
@@ -131,7 +131,7 @@ class AuthController extends AControllerBase
 
         $user = User::getOne($this->app->getAuth()->getLoggedUserId());
 
-        if($this->app->getAuth()->login($user->getEmail(), $this->request()->getValue('oldPassword'))){
+        if ($this->app->getAuth()->login($user->getEmail(), $this->request()->getValue('oldPassword'))) {
             if ($this->request()->getValue('password') != $this->request()->getValue('repassword')) {
                 $data = ['message' => 'Heslá sa nezhodujú!'];
                 return $this->html($data, viewName: 'edit');
@@ -141,7 +141,7 @@ class AuthController extends AControllerBase
                 return $this->html($data, viewName: 'edit');
             } else {
                 $user->setUsername($username);
-                if($this->request()->getValue('password') != null){
+                if ($this->request()->getValue('password') != null) {
                     $user->setPassword(password_hash($this->request()->getValue('password'), PASSWORD_DEFAULT));
                 }
 
@@ -150,9 +150,21 @@ class AuthController extends AControllerBase
                 return $this->redirect('index.php');
             }
         } else {
-        $data = ['message' => 'Stare heslo sa nehoduje!'];
-        return $this->html($data, viewName: 'edit');
+            $data = ['message' => 'Stare heslo sa nehoduje!'];
+            return $this->html($data, viewName: 'edit');
+        }
+
     }
 
+    public function emailCheck()
+    {
+        $message = $this->request()->getValue('message');
+        $emails = User::getAll("email = ?", [$message]);
+
+        if(sizeof($emails) == 0){
+            return $this->json(['duplicity' => false]);
+        } else {
+            return $this->json(['duplicity' => true]);
+        }
     }
 }

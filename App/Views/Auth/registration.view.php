@@ -14,9 +14,11 @@ $layout = 'auth';
                     </div>
                     <form class="form-signin" method="post" action="?c=auth&a=store">
                         <div class="form-label-group mb-3">
-                            <input type="email" name="email" class="form-control"
+                            <label id="mailInfo" class="text-danger"></label>
+                            <input type="email" name="email" class="form-control " id="emailInfo" onchange="emailCheck()"
                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="E-mail"
                                    <?php if($data != null){?>value="<?php echo $data['email']?>" <?php }?>>
+
                         </div>
 
                         <div class="form-label-group mb-3">

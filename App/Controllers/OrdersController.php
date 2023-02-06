@@ -24,7 +24,7 @@ class OrdersController extends AControllerBase
     {
         $id = $this->request()->getValue('id');
         $order = Order::getOne($id);
-        $data = ['id' => $id, 'products' => $order->getOrtderedProduct($id), 'status' => $order->getStatus()];
+        $data = ['id' => $id, 'products' => $order->getOrtderedProduct(), 'status' => $order->getStatus()];
         return $this->html($data,'order');
     }
 
@@ -39,6 +39,10 @@ class OrdersController extends AControllerBase
 
     public function add()
     {
+        $id = $this->request()->getValue('id');
+        if(!Product::getOne($id)){
+            return $this->json(['e' => "Error, Product does not exist"]);
+        }
         $order = Order::getAll("status = ?", ['Prebieha']);
         if(sizeof($order) == 0){
             $order = $this->create();
@@ -46,7 +50,6 @@ class OrdersController extends AControllerBase
             $order = $order[0];
         }
 
-        $id = $this->request()->getValue('id');
         $ordProduct = OrdersProduct::getAll("productId = ? and orderId = ?", [$id, $order->getId()]);
         if(sizeof($ordProduct) == 0){
             $ordProduct = new OrdersProduct();
@@ -58,15 +61,17 @@ class OrdersController extends AControllerBase
             $ordProduct->setCount($ordProduct->getCount() + 1);
         }
 
+
         $ordProduct->save();
-        $type = Product::getOne($id)->getType();
-        if($type == "cestny"){
-            return $this->redirect('?c=products&a=cestne');
-        } else if($type == "horsky"){
-            return $this->redirect('?c=products&a=horske');
-        } else {
-            return $this->redirect('?c=products&a=ebike');
-        }
+        return $this->json(['count' => $order->getCountOfProduct()]);
+//        $type = Product::getOne($id)->getType();
+//        if($type == "cestny"){
+//            return $this->redirect('?c=products&a=cestne');
+//        } else if($type == "horsky"){
+//            return $this->redirect('?c=products&a=horske');
+//        } else {
+//            return $this->redirect('?c=products&a=ebike');
+//        }
     }
 
     public function create()
@@ -101,7 +106,7 @@ class OrdersController extends AControllerBase
 
         $id = Order::getAll("status = ?", ['Prebieha'])[0]->getId();
         $order = Order::getOne($id);
-        $data = ['id' => $id, 'products' => $order->getOrtderedProduct($id), 'status' => $order->getStatus()];
+        $data = ['id' => $id, 'products' => $order->getOrtderedProduct(), 'status' => $order->getStatus()];
         return $this->html($data,'order');
     }
 }

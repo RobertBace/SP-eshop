@@ -41,9 +41,9 @@
                 <a href="?c=orders&a=index" >
                     <img src="public/images/cart3.svg" class="logo" id="cart" alt="...">
                 </a>
-                    <img src="public/images/red.png" class="logo indicator" id="cartIndicator" alt="...">
+                <img src="public/images/red.png" class="logo indicator" id="cartIndicator" alt="...">
 
-                    <a class="indicatorNumber" id="cartIndicatorNum">0</a>
+                <a class="indicatorNumber" id="cartIndicatorNum">0</a>
                 <div class=" dropdown menuText ">
                     <a class=" dropdown-toggle menuText" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">

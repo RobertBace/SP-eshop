@@ -29,7 +29,7 @@
                                 <td>  <?php echo $product->getId() ?>  </td>
                                 <td> <?php echo $product->getBrand() ?> </td>
                                 <td> <?php echo $product->getCountOfProduct($product->getId(), $data['id']) ?> </td>
-                                <td> <?php echo $product->getPrice() ?> </td>
+                                <td> <?php echo $product->getPrice() ?> €</td>
                                 <?php if ($data['status'] == "Prebieha") { ?>
                                     <td class="productDelete"><a class="productDeleteX"
                                                                  href="?c=orders&a=delete&id=<?php echo $product->getId() ?>">X</a>

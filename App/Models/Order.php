@@ -91,14 +91,27 @@ class Order extends Model
     /**
      * @return mixed
      */
-    public function getOrtderedProduct($id)
+    public function getOrtderedProduct()
     {
-        $product = OrdersProduct::getAll("orderId = ?", [$id]);
+        $product = OrdersProduct::getAll("orderId = ?", [$this->getId()]);
         $orderedProduct = [];
         foreach ($product as $current){
             array_push($orderedProduct, Product::getOne($current->getProductId()));
         }
 
         return $orderedProduct;
+    }
+    /**
+     * @return mixed
+     */
+    public function getCountOfProduct()
+    {
+        $product = OrdersProduct::getAll("orderId = ?", [$this->getId()]);
+        $count = 0;
+        foreach ($product as $current){
+            $count += $current->getCount();
+        }
+
+        return $count;
     }
 }
