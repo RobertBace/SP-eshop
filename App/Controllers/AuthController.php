@@ -105,6 +105,7 @@ class AuthController extends AControllerBase
                 $user->setEmail($email);
                 $user->setUsername($username);
                 $user->setPassword($password);
+                $user->setRight("read");
 
                 $user->save();
 

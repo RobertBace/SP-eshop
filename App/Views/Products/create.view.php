@@ -41,7 +41,7 @@
                                 <?php if ($data->getType() == null) { ?>
                                     <option value="" selected disabled>Please select</option>
                                 <?php } else { ?>
-                                    <option value="<?php echo $data->getType() ?>"></option>
+                                    <option> <?php echo $data->getType() ?> </option>
                                 <?php } ?>
 
                                 <?php if ($data->getType() != "cestny") { ?>
@@ -66,7 +66,7 @@
 
                         <div>
 
-                                <input type="file" name="img">
+                            <input type="file" name="img">
 
                         </div>
                         <input type="submit" value="odoslať" class="mt-2">

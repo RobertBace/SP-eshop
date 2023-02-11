@@ -24,7 +24,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg menu co">
+<nav class="navbar navbar-expand-lg menu co z-index">
     <div class="container-fluid">
         <a href="index.php" class="navbar-brand mb-0 h1">
             <img src="public/images/logo.webp" class="logo" alt="logo firmy">
@@ -38,18 +38,21 @@
 
         <div class="collapse navbar-collapse ms-3" id="navbarScroll">
             <div class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll " style="--bs-scroll-height: 400px;">
-                <a href="?c=orders&a=index" >
-                    <img src="public/images/cart3.svg" class="logo" id="cart" alt="...">
-                </a>
-                <img src="public/images/red.png" class="logo indicator" id="cartIndicator" alt="...">
+                <div class="mt-1">
+                    <a href="?c=orders&a=index" class="none-decoration">
+                        <img src="public/images/cart3.svg" class="logo" id="cart" alt="...">
+                    </a>
+                    <img src="public/images/red.png" class="logo indicator" id="cartIndicator" alt="...">
 
-                <a class="indicatorNumber" id="cartIndicatorNum">0</a>
-                <div class=" dropdown menuText ">
+                    <a class="indicatorNumber" id="cartIndicatorNum">0</a>
+                </div>
+
+                <div class=" dropdown menuText mt-1 ">
                     <a class=" dropdown-toggle menuText" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         Bicykle
                     </a>
-                    <ul class="dropdown-menu z-Home">
+                    <ul class="dropdown-menu z-Home mt-1">
                         <li><a class="dropdown-item" href="?c=products&a=cestne">Cestné bicykle</a></li>
                         <li><a class="dropdown-item" href="?c=products&a=horske">Horské bicykle</a></li>
                         <li><a class="dropdown-item" href="?c=products&a=ebike">E-bicykle</a></li>
@@ -82,7 +85,7 @@
     </div>
 </nav>
 
-<div class="container-fluid mt-3">
+<div class="container-fluid px-0">
     <div class="web-content">
         <?= $contentHTML ?>
     </div>

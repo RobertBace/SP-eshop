@@ -43,14 +43,10 @@ class HomeController extends AControllerBase
 
     public function indicate()
     {
-        if($this->app->getAuth()->isLogged()){
-            if($this->app->getAuth()){
-                $userId = $this->app->getAuth()->getLoggedUserId();
-                $count = Order::getAll("status = ? and user = ?", ['Prebieha', $userId])[0]->getCountOfProduct();
-                return $this->json(['count' => $count]);
-            } else {
-                return $this->json(['count' => 0]);
-            }
+        if ($this->app->getAuth()->isLogged()) {
+            $userId = $this->app->getAuth()->getLoggedUserId();
+            $count = Order::getAll("status = ? and user = ?", ['Prebieha', $userId])[0]->getCountOfProduct();
+            return $this->json(['count' => $count]);
         } else {
             return $this->json(['count' => 0]);
         }

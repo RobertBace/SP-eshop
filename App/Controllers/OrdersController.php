@@ -17,96 +17,124 @@ class OrdersController extends AControllerBase
     {
         $auth = $this->app->getAuth();
         $data = Order::getAll("user = ?", [$auth->getLoggedUserId()]);
-        return $this->html($data,'index');
+        return $this->html($data, 'index');
     }
 
-    public function ordered() : Response
+    public function ordered(): Response
     {
-        $id = $this->request()->getValue('id');
-        $order = Order::getOne($id);
-        $data = ['id' => $id, 'products' => $order->getOrtderedProduct(), 'status' => $order->getStatus()];
-        return $this->html($data,'order');
+        $auth = $this->app->getAuth();
+        if ($auth->isLogged()) {
+            $id = $this->request()->getValue('id');
+            $order = Order::getOne($id);
+            if ($order) {
+                $data = ['id' => $id, 'products' => $order->getOrtderedProduct(), 'status' => $order->getStatus()];
+                return $this->html($data, 'order');
+            } else {
+                return $this->html('index');
+            }
+
+        } else {
+            return $this->redirect("?c=auth&a=info");
+        }
     }
 
     public function update()
     {
-        $id = $this->request()->getValue('id');
-        $order = Order::getOne($id);
-        $order->setStatus("Vybavena");
-        $order->save();
-        return $this->index();
+        $auth = $this->app->getAuth();
+        if ($auth->isLogged()) {
+            $id = $this->request()->getValue('id');
+            $order = Order::getOne($id);
+            if ($order) {
+                $order->setStatus("Vybavena");
+                $order->save();
+            }
+            return $this->index();
+        } else {
+            return $this->redirect("?c=auth&a=info");
+        }
     }
 
     public function add()
     {
-        $id = $this->request()->getValue('id');
-        if(!Product::getOne($id)){
-            return $this->json(['e' => "Error, Product does not exist"]);
-        }
-        $order = Order::getAll("status = ?", ['Prebieha']);
-        if(sizeof($order) == 0){
-            $order = $this->create();
+        $auth = $this->app->getAuth();
+        if ($auth->isLogged()) {
+            $id = $this->request()->getValue('id');
+            if (!Product::getOne($id)) {
+                return $this->json(['e' => "Error, Product does not exist"]);
+            }
+            $userId = $this->app->getAuth()->getLoggedUserId();
+            $order = Order::getAll("status = ? and user = ?", ['Prebieha', $userId]);
+            if (sizeof($order) == 0) {
+                $order = $this->create();
+            } else {
+                $order = $order[0];
+            }
+
+            $ordProduct = OrdersProduct::getAll("productId = ? and orderId = ?", [$id, $order->getId()]);
+            if (sizeof($ordProduct) == 0) {
+                $ordProduct = new OrdersProduct();
+                $ordProduct->setOrderId($order->getId());
+                $ordProduct->setProductId($id);
+                $ordProduct->setCount(1);
+            } else {
+                $ordProduct = $ordProduct[0];
+                $ordProduct->setCount($ordProduct->getCount() + 1);
+            }
+
+
+            $ordProduct->save();
+            return $this->json(['count' => $order->getCountOfProduct()]);
         } else {
-            $order = $order[0];
+            return $this->redirect("?c=auth&a=info");
         }
-
-        $ordProduct = OrdersProduct::getAll("productId = ? and orderId = ?", [$id, $order->getId()]);
-        if(sizeof($ordProduct) == 0){
-            $ordProduct = new OrdersProduct();
-            $ordProduct->setOrderId($order->getId());
-            $ordProduct->setProductId($id);
-            $ordProduct->setCount(1);
-        } else {
-            $ordProduct = $ordProduct[0];
-            $ordProduct->setCount($ordProduct->getCount() + 1);
-        }
-
-
-        $ordProduct->save();
-        return $this->json(['count' => $order->getCountOfProduct()]);
-//        $type = Product::getOne($id)->getType();
-//        if($type == "cestny"){
-//            return $this->redirect('?c=products&a=cestne');
-//        } else if($type == "horsky"){
-//            return $this->redirect('?c=products&a=horske');
-//        } else {
-//            return $this->redirect('?c=products&a=ebike');
-//        }
     }
 
     public function create()
     {
         $auth = $this->app->getAuth();
-        $order = new Order();
-        $order->setUser($auth->getLoggedUserId());
-        $order->setDate(date("Y-m-d"));
-        $order->setStatus("Prebieha");
-        $order->save();
+        if ($auth->isLogged()) {
+            $auth = $this->app->getAuth();
+            $order = new Order();
+            $order->setUser($auth->getLoggedUserId());
+            $order->setDate(date("Y-m-d"));
+            $order->setStatus("Prebieha");
+            $order->save();
 
-        return $order;
+            return $order;
+        } else {
+            return $this->redirect("?c=auth&a=info");
+        }
     }
 
     public function delete()
     {
-        $order = Order::getAll("status = ?", ['Prebieha']);
-        if(sizeof($order) == 0){
-            return $this->html('order');
-        } else {
-            $order = $order[0];
-        }
-        $id = $this->request()->getValue('id');
-        $ordProduct = OrdersProduct::getAll("productId = ? and orderId = ?", [$id, $order->getId()]);
-        if($ordProduct[0]->getCount() > 1){
-            $ordProduct[0]->setCount($ordProduct[0]->getCount() - 1);
-            $ordProduct[0]->save();
-        } else {
-            $ordProduct[0]->delete();
-        }
+        $auth = $this->app->getAuth();
+        if ($auth->isLogged()) {
+            $userId = $this->app->getAuth()->getLoggedUserId();
+            $order = Order::getAll("status = ? and user = ?", ['Prebieha', $userId]);
+            if (sizeof($order) == 0) {
+                return $this->html('order');
+            } else {
+                $order = $order[0];
+            }
+            $id = $this->request()->getValue('id');
+            $ordProduct = OrdersProduct::getAll("productId = ? and orderId = ?", [$id, $order->getId()]);
+            if (sizeof($ordProduct) > 0) {
+                if ($ordProduct[0]->getCount() > 1) {
+                    $ordProduct[0]->setCount($ordProduct[0]->getCount() - 1);
+                    $ordProduct[0]->save();
+                } else {
+                    $ordProduct[0]->delete();
+                }
+            }
 
 
-        $id = Order::getAll("status = ?", ['Prebieha'])[0]->getId();
-        $order = Order::getOne($id);
-        $data = ['id' => $id, 'products' => $order->getOrtderedProduct(), 'status' => $order->getStatus()];
-        return $this->html($data,'order');
+            $id = $order->getId();
+            $order = Order::getOne($id);
+            $data = ['id' => $id, 'products' => $order->getOrtderedProduct(), 'status' => $order->getStatus()];
+            return $this->html($data, 'order');
+        } else {
+            return $this->redirect("?c=auth&a=info");
+        }
     }
 }

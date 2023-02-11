@@ -5,9 +5,10 @@ $layout = 'auth';
 ?>
 
 <?php $user = \App\Models\User::getOne($auth->getLoggedUserId()) ?>
+
 <div class="container">
     <div class="row">
-        <div class="col-sm-9 col-md-8 col-lg-8 mx-auto">
+        <div class="col-sm-10 col-md-9 col-lg-9 mx-auto">
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h1 class="card-title text-center pb-1 pt-1"> <?= $user->getUsername() ?> </h1>

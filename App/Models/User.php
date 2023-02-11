@@ -10,6 +10,7 @@ class User extends Model
     protected $email;
     protected $username;
     protected $password;
+    protected $right;
 
     /**
      * @return mixed
@@ -73,6 +74,22 @@ class User extends Model
     public function setPassword($password): void
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRight()
+    {
+        return $this->right;
+    }
+
+    /**
+     * @param mixed $right
+     */
+    public function setRight($right): void
+    {
+        $this->right = $right;
     }
 
 

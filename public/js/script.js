@@ -15,6 +15,11 @@ window.onload = function () {
             } else {
                 ind.style.visibility = "visible";
                 num.style.visibility = "visible";
+                if (vKosi > 9) {
+                    num.style.fontSize = 11 + "px";
+                    num.style.left = -30 + "px";
+                    num.style.top = -15 + "px";
+                }
             }
         } else {
             console.error(xhr.responseText);
@@ -39,13 +44,13 @@ function add(id) {
             console.log(vKosi);
             if (vKosi > 9) {
                 num.style.fontSize = 11 + "px";
-                num.style.left = -21 + "px";
-                num.style.top = -3 + "px";
+                num.style.left = -30 + "px";
+                num.style.top = -15 + "px";
                 num.innerText = vKosi;
             } else {
                 num.style.fontSize = 16 + "px";
-                num.style.left = -19 + "px";
-                num.style.top = -7 + "px";
+                num.style.left = -29 + "px";
+                num.style.top = -13 + "px";
                 num.innerText = vKosi;
             }
             let ind = document.getElementById("cartIndicator");
@@ -66,8 +71,6 @@ function add(id) {
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send('id=' + id);
 }
-
-
 
 function emailCheck(){
     let mail = document.getElementById("email");
