@@ -24,7 +24,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg menu co z-index">
+<nav class="navbar navbar-expand-lg menu co">
     <div class="container-fluid">
         <a href="index.php" class="navbar-brand mb-0 h1">
             <img src="public/images/logo.webp" class="logo" alt="logo firmy">

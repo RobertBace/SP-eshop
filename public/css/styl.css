@@ -82,6 +82,7 @@
     position: sticky !important;
     top: 0;
     background: #28baff;
+    width: 100%;
 }
 
 .icons{
@@ -92,8 +93,8 @@
 .bg-color{
     background-color: #9dd2ea;
 }
-.background {
-    background-image: url("https://t3.ftcdn.net/jpg/03/66/59/54/360_F_366595406_YbJE6sWiXnFQet80DPzTnRXKjk8vCtfa.jpg");
+.background{
+    background-image: url("../images/bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0;
@@ -197,8 +198,9 @@
 }
 
 .bg-color-blue{
-    background-color: rgba(110, 207, 255, 0.2);
+    background-color: rgba(0, 172, 255, 0.16);
 }
+
 
 
 

@@ -45,8 +45,13 @@ class HomeController extends AControllerBase
     {
         if ($this->app->getAuth()->isLogged()) {
             $userId = $this->app->getAuth()->getLoggedUserId();
-            $count = Order::getAll("status = ? and user = ?", ['Prebieha', $userId])[0]->getCountOfProduct();
-            return $this->json(['count' => $count]);
+            $count = Order::getAll("status = ? and user = ?", ['Prebieha', $userId])[0];
+            if($count){
+                $count = $count->getCountOfProduct();
+                return $this->json(['count' => $count]);
+            } else {
+                return $this->json(['count' => 0]);
+            }
         } else {
             return $this->json(['count' => 0]);
         }

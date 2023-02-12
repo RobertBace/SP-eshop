@@ -30,25 +30,25 @@
 <div class="text-center">
 
     <div class=" text-center ">
-        <div class="row light-grey pt-4 pb-4 align-middle">
-            <div class="col">
+        <div class="row light-grey pt-4 pb-4 align-middle w-100 mx-0">
+            <div class="col px-0">
                 <img src="public/images/award1.png" alt="ocenenie">
             </div>
-            <div class="col">
+            <div class="col px-0">
                 <img src="public/images/award2.png" alt="ocenenie">
             </div>
         </div>
-        <div class="row pt-5 pb-5">
-            <div class="col ">
+        <div class="row pt-5 pb-5 w-100 mx-0">
+            <div class="col px-0">
                 <img src="public/images/specialized.png" class="logo-img" alt="specialized">
             </div>
-            <div class="col ">
+            <div class="col px-0">
                 <img src="public/images/cannondale.jpg" class="logo-img" alt="cannondale">
             </div>
-            <div class="col ">
+            <div class="col px-0">
                 <img src="public/images/canyon.png" class="logo-img" alt="canyon">
             </div>
-            <div class="col ">
+            <div class="col px-0">
                 <img src="public/images/author.png" class="logo-img" alt="author">
             </div>
         </div>
