@@ -1,5 +1,4 @@
 <?php
-$layout = 'auth';
 /** @var \App\Core\IAuthenticator $auth */
 /** @var Array $data */
 ?>
