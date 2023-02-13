@@ -41,8 +41,8 @@
                     </table>
                     <div class="row">
                         <?php if ($data['status'] != "Vybavena") { ?>
-                            <a href="?c=orders&a=update&id= <?php echo $data['id'] ?>"
-                               class="btn btn-success buttonCeenter ">Potvrdiť a odoslať objednavku </a>
+                            <a href="?c=orders&a=update&id=<?php echo $data['id'] ?>"
+                               class="btn btn-success buttonCeenter">Potvrdiť a odoslať objednavku </a>
                         <?php } ?>
                         <a href="?c=orders&a=index"
                            class="btn btn-primary buttonCeenter mt-1">Späť na objednávky </a>

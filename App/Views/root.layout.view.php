@@ -31,22 +31,23 @@
         </a>
         <a class="brand" href="index.php">All4Cycling</a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll1"
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                 aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse ms-3" id="navbarScroll1">
+        <div class="collapse navbar-collapse ms-3" id="navbarScroll">
             <div class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll " style="--bs-scroll-height: 400px;">
-                <div class="mt-1">
-                    <a href="?c=orders&a=index" class="none-decoration">
-                        <img src="public/images/cart3.svg" class="logo" id="cart" alt="...">
-                    </a>
-                    <img src="public/images/red.png" class="logo indicator" id="cartIndicator" alt="...">
+                <?php if ($auth->isLogged()) { ?>
+                    <div class="mt-1">
+                        <a href="?c=orders&a=index" class="none-decoration">
+                            <img src="public/images/cart3.svg" class="logo" id="cart" alt="...">
+                        </a>
+                        <img src="public/images/red.png" class="logo indicator" id="cartIndicator" alt="...">
 
-                    <a class="indicatorNumber" id="cartIndicatorNum">0</a>
-                </div>
-
+                        <a class="indicatorNumber" id="cartIndicatorNum">0</a>
+                    </div>
+                <?php }  ?>
                 <div class=" dropdown menuText mt-1">
                     <a class=" dropdown-toggle menuText" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">

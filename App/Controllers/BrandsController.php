@@ -12,9 +12,13 @@ class BrandsController extends AControllerBase
 {
     public function index(): Response
     {
-        $brands = Brand::getAll();
-        $data = ['znacky' => $brands, 'message' => "", 'messageInfo' => ""];
-        return $this->html($data, viewName: 'index');
+        $auth = $this->app->getAuth();
+        if ($auth->isLogged()) {
+            $brands = Brand::getAll();
+            $data = ['znacky' => $brands, 'message' => "", 'messageInfo' => ""];
+            return $this->html($data, viewName: 'index');
+        }
+        return $this->redirect("?c=home&a=index");
     }
 
     public function store()

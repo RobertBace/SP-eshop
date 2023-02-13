@@ -16,8 +16,12 @@ class OrdersController extends AControllerBase
     public function index(): Response
     {
         $auth = $this->app->getAuth();
-        $data = Order::getAll("user = ?", [$auth->getLoggedUserId()]);
-        return $this->html($data, 'index');
+        if ($auth->isLogged()) {
+            $auth = $this->app->getAuth();
+            $data = Order::getAll("user = ?", [$auth->getLoggedUserId()]);
+            return $this->html($data, 'index');
+        }
+        return $this->redirect("?c=auth&a=login");
     }
 
     public function ordered(): Response
